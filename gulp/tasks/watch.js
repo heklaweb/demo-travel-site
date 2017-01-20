@@ -24,6 +24,11 @@ gulp.task('watch', function () {
         gulp.start('cssInject');
     });
 
+    /* Änderungen an *.js Dateien im "scripts"-Verzeichnis überwachen */
+    watch('./app/assets/scripts/**/*.js', function () {
+        gulp.start('scriptsRefresh');
+    });
+
 });
 
 /* Änderungen an css-Dateien injizieren (ohne Reload!) */
@@ -31,3 +36,7 @@ gulp.task('cssInject', ['styles'], function () {
     return gulp.src('./app/temp/styles/styles.css')
         .pipe(browserSync.stream());
 });
+
+gulp.task('scriptsRefresh', ['scripts'], function() {
+    browserSync.reload();
+})
