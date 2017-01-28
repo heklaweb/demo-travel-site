@@ -1,42 +1,35 @@
-var gulp = require('gulp');
-var watch = require('gulp-watch');
-var browserSync = require('browser-sync').create();
+var gulp = require('gulp'),
+watch = require('gulp-watch'),
+browserSync = require('browser-sync').create();
 
-/* Überwachung */
-gulp.task('watch', function () {
+gulp.task('watch', function() {
 
-    browserSync.init({
-        notify: false,
-        server: {
-            baseDir: "app"
-        }
-    });
+  browserSync.init({
+    notify: false,
+    server: {
+      baseDir: "app"
+    }
+  });
 
-    /* Änderungen an "index.html" überwachen */
-    watch('./app/index.html', function () {
-        // gulp.start('html');
-        browserSync.reload();
-    });
+  watch('./app/index.html', function() {
+    browserSync.reload();
+  });
 
-    /* Änderungen an *.css Dateien im "styles"-Verzeichnis überwachen */
-    watch('./app/assets/styles/**/*.css', function () {
-        // gulp.start('styles');
-        gulp.start('cssInject');
-    });
+  watch('./app/assets/styles/**/*.css', function() {
+    gulp.start('cssInject');
+  });
 
-    /* Änderungen an *.js Dateien im "scripts"-Verzeichnis überwachen */
-    watch('./app/assets/scripts/**/*.js', function () {
-        gulp.start('scriptsRefresh');
-    });
+  watch('./app/assets/scripts/**/*.js', function() {
+    gulp.start('scriptsRefresh');
+  })
 
 });
 
-/* Änderungen an css-Dateien injizieren (ohne Reload!) */
-gulp.task('cssInject', ['styles'], function () {
-    return gulp.src('./app/temp/styles/styles.css')
-        .pipe(browserSync.stream());
+gulp.task('cssInject', ['styles'], function() {
+  return gulp.src('./app/temp/styles/styles.css')
+    .pipe(browserSync.stream());
 });
 
 gulp.task('scriptsRefresh', ['scripts'], function() {
-    browserSync.reload();
-})
+  browserSync.reload();
+});

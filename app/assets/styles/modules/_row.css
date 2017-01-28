@@ -34,7 +34,7 @@
     }
 
     @mixin atMedium {
-        
+
         &__bottom-margin-until-medium {
             margin-bottom: 0;
         }
@@ -65,7 +65,7 @@
     }
 
     @mixin atLarge {
-        
+
         &__bottom-margin-until-large {
             margin-bottom: 0;
         }
@@ -96,7 +96,7 @@
     }
 
     /* Begin Equal Hight Rules */
-    &--equal-height-at-medium {
+    .flexbox &--equal-height-at-medium {
         @mixin atMedium {
             display: flex;
         }
@@ -106,7 +106,7 @@
             display: flex;
         }
     }
-    &--equal-height-at-large {
+    .flexbox &--equal-height-at-large {
         @mixin atLarge {
             display: flex;
         }
